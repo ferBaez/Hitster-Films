@@ -45,12 +45,12 @@ export function VideoModal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-6xl aspect-video bg-black shadow-2xl rounded-sm overflow-hidden border border-white/10"
+            className="relative w-full max-w-6xl aspect-video bg-black shadow-2xl rounded-sm overflow-hidden border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
               src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1`}
-              className="w-full h-full"
+              className="absolute top-0 left-0 w-full h-full"
               allowFullScreen
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

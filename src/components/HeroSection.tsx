@@ -19,11 +19,11 @@ export function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
       {/* Video Background */}
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-[300vw] sm:w-[200vw] md:w-[150vw] xl:w-[115vw] h-[300vw] sm:h-[200vw] md:h-[150vw] xl:h-[115vh] pointer-events-none opacity-40 left-1/2 -translate-x-1/2">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] pointer-events-none opacity-40">
         {isMounted && (
           <iframe
             src="https://www.youtube.com/embed/hYf9ABw5ziw?autoplay=1&mute=1&controls=0&loop=1&playlist=hYf9ABw5ziw&playsinline=1&rel=0&showinfo=0&modestbranding=1"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
+            className="w-full h-full"
             allow="autoplay; encrypted-media"
             frameBorder="0"
           />
