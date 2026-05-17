@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-heading: "Space Grotesk", sans-serif;
+  
+  --color-hitster-dark: #0a0a0a;
+  --color-hitster-gray: #1a1a1a;
+  --color-hitster-light: #f5f5f5;
+  --color-hitster-accent: #e50914; /* A cinematic red */
+}
+
+@layer base {
+  body {
+    @apply bg-hitster-dark text-hitster-light font-sans antialiased overflow-x-hidden;
+  }
+}
+

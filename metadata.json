@@ -1,0 +1,8 @@
+{
+  "name": "Hitster Films",
+  "description": "Productora audiovisual especializada en películas, comerciales y contenido de alta calidad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
