@@ -23,17 +23,38 @@ export function ContactSection() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate network request
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log("Form data submitted:", data);
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
     
-    // Reset success message after 5 seconds
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 5000);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            project: data.project,
+        })
+      });
+      
+      if (response.ok) {
+        setIsSuccess(true);
+        reset();
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        alert("Hubo un error al enviar el formulario. Por favor, intenta de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Hubo un error al enviar el formulario. Por favor, revisa tu conexión.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
