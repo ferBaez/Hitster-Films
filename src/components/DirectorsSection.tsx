@@ -27,14 +27,9 @@ const directors = [
     website: "https://ferbaez.github.io/Mayra-Berry/"
   },
   {
-    name: "Camilo Sánchez",
-    description: "Estética cruda y cinematografía vanguardista.",
-    video: { id: "8_wirbOyr6M", type: 'youtube' as const }, 
-  },
-  {
-    name: "Sofía Rossi",
-    description: "Especialista en belleza, moda y dirección de arte meticulosa.",
-    video: { id: "IX_dE3S1MXU", type: 'youtube' as const },
+    name: "Pablo Maiola",
+    description: "Dirección asertiva y estética visual cautivadora.",
+    video: { id: "544615537", type: 'vimeo' as const },
   }
 ];
 
