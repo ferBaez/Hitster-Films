@@ -1,31 +1,77 @@
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, Play } from 'lucide-react';
 import { motion } from 'motion/react';
 import { VideoModal } from './VideoModal';
 
+type VideoMedia = {
+  id: string;
+  type: 'youtube' | 'vimeo';
+};
+
 const directors = [
+  {
+    name: "Oscar Azula",
+    description: "Dirección visual y narrativa potente.",
+    video: { id: "HBTi0wnyuP0", type: 'youtube' as const },
+  },
+  {
+    name: "Kremer & Johnson",
+    description: "Estética colaborativa y contemporánea.",
+    video: { id: "243349917", type: 'vimeo' as const },
+  },
   {
     name: "Mayra Berry",
     description: "Una visión íntima y audaz de la narrativa contemporánea.",
-    videoId: "xq-tCRAK0xY",
+    video: { id: "xq-tCRAK0xY", type: 'youtube' as const },
     website: "https://ferbaez.github.io/Mayra-Berry/"
   },
   {
     name: "Camilo Sánchez",
     description: "Estética cruda y cinematografía vanguardista.",
-    videoId: "8_wirbOyr6M", 
+    video: { id: "8_wirbOyr6M", type: 'youtube' as const }, 
   },
   {
     name: "Sofía Rossi",
     description: "Especialista en belleza, moda y dirección de arte meticulosa.",
-    videoId: "IX_dE3S1MXU",
+    video: { id: "IX_dE3S1MXU", type: 'youtube' as const },
   }
 ];
 
+function Thumbnail({ video, className, alt }: { video: VideoMedia, className: string, alt: string }) {
+  const [vimeoSrc, setVimeoSrc] = useState('');
+
+  useEffect(() => {
+    if (video.type === 'vimeo') {
+      fetch(`https://vimeo.com/api/v2/video/${video.id}.json`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data[0]) setVimeoSrc(data[0].thumbnail_large);
+        })
+        .catch(() => {});
+    }
+  }, [video]);
+
+  if (video.type === 'vimeo') {
+    if (!vimeoSrc) return <div className={`${className} bg-neutral-900 animate-pulse`} />;
+    return <img src={vimeoSrc} alt={alt} className={className} />;
+  }
+
+  return (
+    <img 
+      src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`} 
+      onError={(e) => {
+        (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${video.id}/hqdefault.jpg`;
+      }}
+      alt={alt}
+      className={className}
+    />
+  );
+}
+
 export function DirectorsSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' });
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [activeVideo, setActiveVideo] = useState<{id: string, type: 'youtube' | 'vimeo'} | null>(null);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -66,19 +112,16 @@ export function DirectorsSection() {
             </div>
 
             <div className="lg:col-span-8 overflow-hidden">
-              <div className="embla" ref={emblaRef}>
+               <div className="embla" ref={emblaRef}>
                 <div className="embla__container flex cursor-grab active:cursor-grabbing">
                   {directors.map((director, index) => (
                     <div className="embla__slide flex-[0_0_100%] sm:flex-[0_0_80%] min-w-0 mr-8" key={index}>
                       <div 
                         className="aspect-video w-full rounded-sm overflow-hidden bg-black mb-6 relative border border-white/5 cursor-pointer group"
-                        onClick={() => setActiveVideo(director.videoId)}
+                        onClick={() => setActiveVideo(director.video)}
                       >
-                        <img 
-                          src={`https://img.youtube.com/vi/${director.videoId}/maxresdefault.jpg`} 
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${director.videoId}/hqdefault.jpg`;
-                          }}
+                        <Thumbnail 
+                          video={director.video}
                           alt={director.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
                         />
@@ -115,7 +158,7 @@ export function DirectorsSection() {
 
       <VideoModal 
         isOpen={!!activeVideo} 
-        videoId={activeVideo} 
+        video={activeVideo} 
         onClose={() => setActiveVideo(null)} 
       />
     </>

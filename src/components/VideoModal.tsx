@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 
 export function VideoModal({ 
   isOpen, 
-  videoId, 
+  video, 
   onClose 
 }: { 
   isOpen: boolean; 
-  videoId: string | null; 
+  video: { id: string, type: 'youtube' | 'vimeo' } | null; 
   onClose: () => void 
 }) {
   useEffect(() => {
@@ -24,7 +24,7 @@ export function VideoModal({
 
   return (
     <AnimatePresence>
-      {isOpen && videoId && (
+      {isOpen && video && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -49,7 +49,9 @@ export function VideoModal({
             onClick={(e) => e.stopPropagation()}
           >
             <iframe
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1`}
+              src={video.type === 'youtube' 
+                ? `https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&rel=0&modestbranding=1`
+                : `https://player.vimeo.com/video/${video.id}?autoplay=1&title=0&byline=0&portrait=0`}
               className="absolute top-0 left-0 w-full h-full"
               allowFullScreen
               frameBorder="0"
