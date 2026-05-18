@@ -96,7 +96,7 @@ export function DirectorsSection() {
               >
                 <h2 className="text-sm tracking-widest uppercase text-hitster-accent mb-4 font-semibold">El Rostro del Cine</h2>
                 <h3 className="text-5xl md:text-6xl font-heading text-white mb-6">Nuestros Directores</h3>
-                <p className="text-gray-400 text-lg leading-relaxed mb-10">
+                <p className="text-gray-400 text-lg leading-relaxed mb-10 text-justify">
                   Detrás de cada gran proyecto hay una mente maestra. Nuestro roster está compuesto por directores que no solo cuentan historias, sino que desafían los límites visuales y narrativos para concebir piezas memorables.
                 </p>
                 
@@ -134,7 +134,7 @@ export function DirectorsSection() {
                       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                         <div>
                           <h4 className="text-3xl font-heading text-white mb-2">{director.name}</h4>
-                          <p className="text-gray-400">{director.description}</p>
+                          <p className="text-gray-400 text-justify">{director.description}</p>
                         </div>
                         {director.website && (
                           <a 

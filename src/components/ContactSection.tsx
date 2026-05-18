@@ -79,7 +79,7 @@ export function ContactSection() {
                   <CheckCircle2 size={40} />
                 </div>
                 <h4 className="text-2xl font-heading text-white mb-2">¡Mensaje enviado!</h4>
-                <p className="text-gray-400">Gracias por contactarnos. Nuestro equipo se comunicará contigo pronto.</p>
+                <p className="text-gray-400 text-justify">Gracias por contactarnos. Nuestro equipo se comunicará contigo pronto.</p>
               </motion.div>
             ) : (
               <motion.form 
