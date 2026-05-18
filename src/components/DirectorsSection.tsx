@@ -30,6 +30,7 @@ const directors = [
     name: "Pablo Maiola",
     description: "Dirección asertiva y estética visual cautivadora.",
     video: { id: "544615537", type: 'vimeo' as const },
+    website: "https://ferbaez.github.io/mr-maiola/"
   }
 ];
 
